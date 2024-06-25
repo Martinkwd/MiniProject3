@@ -24,3 +24,38 @@ function fetchData() {
   });
 }
 module.exports = fetchData;
+
+// const gameModel = require("./models/game");
+
+// function fetchData() {
+//   gameModel.findAll().then((games) => {
+//     if (!games.length) {
+//       fetch(`https://www.freetogame.com/api/games`).then((response) =>
+//         response.json().then((data) => {
+//           gameModel.bulkCreate(data).then(() => {
+//             console.log("data has been inserted into the database");
+//           });
+//         })
+//       );
+//     }
+//   });
+// }
+// module.exports = fetchData;
+
+// const gameModel = require("./models/game");
+
+// function fetchData() {
+//   gameModel.findAll().then((games) => {
+//     if (!games.length) {
+//       fetch(`https://www.freetogame.com/api/games`).then((response) =>
+//         response.json().then((data) => {
+//           gameModel.destroy({ where: {}, truncate: true, cascade: true });
+//           gameModel.bulkCreate(data).then(() => {
+//             console.log("data has been inserted into the database");
+//           });
+//         })
+//       );
+//     }
+//   });
+// }
+// module.exports = fetchData;

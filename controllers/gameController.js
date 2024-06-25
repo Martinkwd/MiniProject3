@@ -6,10 +6,10 @@ const { response } = require("express");
 
 const startUp = (req, res) => {
   fetchData();
-  res.send({ result: 200, data: data });
+  res.send("Data extracted and created database succesfully");
 };
 
-const getGames = (res) => {
+const getGames = (req, res) => {
   Models.Game.findAll({})
     .then((data) => {
       res.send({ result: 200, data: data });
@@ -19,6 +19,29 @@ const getGames = (res) => {
       res.send({ result: 500, error: err.message });
     });
 };
+
+const getOneGames = (req, res) => {
+  Models.Game.findOne({ where: { id: req.params.id } })
+    .then((data) => {
+      res.send({ result: 200, data: data });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
+const getCategotyGames = (req, res) => {
+  Models.Game.findAll({ where: { genre: req.params.category } })
+    .then((data) => {
+      res.send({ result: 200, data: data });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
 const createGames = (data, res) => {
   Models.Game.create(data)
     .then((data) => {
@@ -31,7 +54,7 @@ const createGames = (data, res) => {
 };
 
 const updateGames = (req, res) => {
-  Models.Game.update(req, body, {
+  Models.Game.update(req.body, {
     where: { id: req.params.id },
     returning: true,
   })
@@ -57,6 +80,8 @@ const deleteGames = (req, res) => {
 module.exports = {
   startUp,
   getGames,
+  getCategotyGames,
+  getOneGames,
   createGames,
   updateGames,
   deleteGames,
