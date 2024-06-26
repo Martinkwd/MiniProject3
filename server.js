@@ -3,6 +3,7 @@ const app = express();
 require("dotenv").config();
 let dbConnect = require("./dbConnect");
 const fetchData = require("./gamesData");
+fetchData();
 let gameRoutes = require("./routes/gameRoutes");
 
 app.use(express.json());
